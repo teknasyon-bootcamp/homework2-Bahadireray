@@ -1,4 +1,12 @@
-<?php
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>FUNCTİONS PHP</title>
+</head>
+<body>
+
+<?php 
 
 /**
  * functions.php
@@ -16,6 +24,19 @@
  * bekliyoruz. Bununla ilgili detaylı bilgi diğer betiklerde yer alıyor.
  */
 
+
+
+
+ //basename() işlevi, bir yoldan dosya adını döndürür. Dosyanın uzantısını değişkene atıyoruz
+$file = basename(__FILE__); 
+$server = basename($_SERVER['PHP_SELF']);
+
+if($server == $file) { // functions.php dosyasina direkt erisimi engellemek icin
+   
+   // die fonksiyonu, exit fonksiyonuna benzer bir biçimde bir mesaj (çıktı) verdikten sonra programı (uygulamayı) sonlandırmak amacıyla kullanılır.
+    die ("Bu dosyaya direkt erişilemez");   
+}else {} // Eger iki dosyanin isimleri esit degil ise asagidaki kodlari calistirir
+
 function getLatestPosts($count = 5)
 {
     $posts = [];
@@ -29,7 +50,7 @@ function getLatestPosts($count = 5)
         $type = $postTypes[rand(0, count($postTypes)-1)];
 
         $posts[$id] = [
-            "title" => "Yazı " . $i,
+            "title" => "Başlık " . $i,
             "type" => $type
         ];
     }
@@ -37,15 +58,29 @@ function getLatestPosts($count = 5)
     return $posts;
 }
 
+
+/*
+$degisken = <<<EOT
+    bu metin içersinde tek 'tırnak' veya "çift" tırnak kullanmakta
+    sakınca yoktur hatta değişkenler $isim ve nesneler $nesne->degisken
+    kullanılabilir. son satır haricinde EOT kelimesi bile kullanılır.  
+EOT;
+*/
+
 function getPostDetails($id, $title)
 {
     echo "<h1>".$title." (#".$id.")</h1>";
     echo <<<EOT
 <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a iaculis justo, ac molestie justo. Integer semper nibh non imperdiet blandit. Integer nec diam eget sapien viverra rutrum ut eu justo. Suspendisse efficitur pretium eleifend. Vivamus ex nibh, euismod eget massa ut, accumsan ullamcorper nisi. Phasellus tristique magna et nibh dictum rhoncus. Phasellus at metus quis mi egestas blandit. Vestibulum lacinia ut tortor nec consectetur. Nulla sed risus ut est imperdiet vulputate ac non quam. Aliquam viverra erat vitae diam commodo, et molestie metus ultricies. Praesent rutrum urna a nisi egestas aliquam sit amet eu eros.
+    Merhabalar ben Bahadır Eray, İstanbul'da yaşıyorum. Düzce üniversitesi Bilgisayar mühendisliği mezunuyum. En son karantina sıkıntısında annemle birlikte sosyal medyada yemek video içerikleri üretirken kendimi buldum. Bu durum farklı alanlarda uğraşlar verirken zamanı verimli geçirmemi sağladı. Bilgisayar oyunlarına karşı çok büyük ilgim yok ama en son ne yaptım dersek bir kaç araba yarışıyla vakit geçirdim diyebilirim. Benim için yazılım dünyasında bir içerik ortaya çıkartmak çok farklı bir mutluluktur. Bu mutluluğu her zaman daim olmasını sağlayacağım. Bundan çok çok uzun yıllarda bir bilim insanı olarak kariyerime devam etmek istiyorum.
 </p>
 EOT;
+}	
+
+
+function getRandomPostCount($min,$max){  //Random değerler üreten bir fonksiyon
+    return rand($min,$max);
 }
-
-// Aşağıya fonksiyonu tanımlayabilirsiniz.
-
+ ?>
+</body>
+</html>
